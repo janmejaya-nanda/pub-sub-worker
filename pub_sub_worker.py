@@ -66,9 +66,8 @@ class PubSubWorker(ABC):
                                                        max_messages=self.max_messages_to_pull,
                                                        return_immediately=False)
             except DeadlineExceeded:
-                self.logger.info(
-                    "'{}'-> Subscription is empty, pulling message from new subscription".format(subscription)
-                )
+                pass
+
             if response and response.received_messages:
                 # got a message process it
                 self.logger.info("Processing {} messages..".format(len(response.received_messages)))

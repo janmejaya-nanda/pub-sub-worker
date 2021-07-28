@@ -16,6 +16,9 @@ using `PubSubWorker` is quite simple
   
 #### An Example of child class
 ```buildoutcfg
+from pub_sub_worker import PubSubWorker
+
+
 class ChildWorker(PubSubWorker):
     def __init__(self, project_id, topic_id, subscriptions_with_priority, child_worker_arg, **kwargs):
         super(ChildWorker, self).__init__(project_id=project_id, topic_id=topic_id, subscriptions_with_priority=subscriptions_with_priority, **kwargs)
@@ -27,7 +30,7 @@ class ChildWorker(PubSubWorker):
             # process the message as per requirement
             
             # updating `return_vals` so that status will be availbale in the main thread.
-            return_vals.update({'status': 'fail', 'message': str(exc)})
+            return_vals.update({'status': 'success', 'message': 'Message successfully processed!'})
         except Exception as exc:
             return_vals.update({'status': 'fail', 'message': str(exc)})
      
